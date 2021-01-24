@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
  * Create on: 2021/1/23 22:36
  * Description:
  */
-public abstract class MultiAdapter<T> extends RecyclerView.Adapter<BaseVH>{
+public abstract class MultiAdapter<T> extends RecyclerView.Adapter<BaseVH> {
     //ItemType布局类型
     public static final int TYPE_HEADER = 0;
     public static final int TYPE_ONE = 1;
@@ -41,6 +42,9 @@ public abstract class MultiAdapter<T> extends RecyclerView.Adapter<BaseVH>{
     @NonNull
     @Override
     public abstract BaseVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType);
+
+    //抽象方法
+    public abstract void bindData(BaseVH holder, T data, int position);
 
     @Override
     public void onBindViewHolder(@NonNull BaseVH holder, int position) {
@@ -91,29 +95,70 @@ public abstract class MultiAdapter<T> extends RecyclerView.Adapter<BaseVH>{
         }
     }
 
-//    @Override
-//    public void onViewAttachedToWindow(@NonNull RecyclerVH holder) {
-//        super.onViewAttachedToWindow(holder);
-//        ViewGroup.LayoutParams layoutParams = holder.itemView.getLayoutParams();
-//        if (layoutParams instanceof StaggeredGridLayoutManager.LayoutParams) {
-//            if (holder.getLayoutPosition() == 0) {
-//                StaggeredGridLayoutManager.LayoutParams lp =
-//                        (StaggeredGridLayoutManager.LayoutParams) layoutParams;
-//                //如果是瀑布流布局，则头布局占一整行
-//                lp.setFullSpan(true);
-//            }
-//        }
-//    }
+    @Override
+    public void onViewAttachedToWindow(@NonNull BaseVH holder) {
+        super.onViewAttachedToWindow(holder);
+        ViewGroup.LayoutParams layoutParams = holder.itemView.getLayoutParams();
+        if (layoutParams instanceof StaggeredGridLayoutManager.LayoutParams) {
+            if (holder.getLayoutPosition() == 0) {
+                StaggeredGridLayoutManager.LayoutParams lp =
+                        (StaggeredGridLayoutManager.LayoutParams) layoutParams;
+                //如果是瀑布流布局，则头布局占一整行
+                lp.setFullSpan(true);
+            }
+        }
+    }
 
     //Item点击事件
-    public interface RecyclerClickListener{
+    public interface RecyclerClickListener {
         void onItemClick(int position);
+
         void onItemLongClick(int position);
     }
+
     public void setRecyclerClickListener(RecyclerClickListener recyclerClickListener) {
         this.recyclerClickListener = recyclerClickListener;
     }
 
-    //抽象方法
-    public abstract void bindData(BaseVH holder, T data, int position);
+    //设置数据
+    public void setData(List<T> data) {
+        if (data != null) mData = data;
+    }
+
+    //添加数据
+    public void addData(List<T> data) {
+        addData(0, data);
+    }
+
+    public void addData(int position, List<T> data) {
+        if (data != null && data.size() > 0) {
+            if (position > 0) {
+                mData.addAll(position, data);
+                notifyItemRangeChanged(position, mData.size());
+            } else if (position == 0) {
+                mData.addAll(0, data);
+                notifyDataSetChanged();
+            }
+        }
+    }
+
+    //清除数据
+    public void clearData() {
+        if (mData != null && mData.size() > 0) {
+            mData.clear();
+//            //通知适配器刷新
+//            notifyDataSetChanged();
+        }
+    }
+
+    //下拉刷新
+    public void refreshData(List<T> data) {
+        clearData();
+        addData(0, data);
+    }
+
+    //上拉加载
+    public void loadMoreData(List<T> data) {
+        addData(mData.size(), data);
+    }
 }
