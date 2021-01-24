@@ -12,10 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
  * Create on: 2021/1/23 22:28
  * Description:
  */
-public class RecyclerVH extends RecyclerView.ViewHolder{
+public class BaseVH extends RecyclerView.ViewHolder{
     private SparseArray<View> mViews;
 
-    public RecyclerVH(View itemView) {
+    public BaseVH(View itemView) {
         super(itemView);
         mViews = new SparseArray<>();
     }
@@ -30,25 +30,25 @@ public class RecyclerVH extends RecyclerView.ViewHolder{
     }
 
     //通用方法
-    public RecyclerVH setText(int id, String value){
+    public BaseVH setText(int id, String value){
         TextView view = getView(id);
         view.setText(value);
         return this;
     }
 
-    public RecyclerVH setImageRes(int viewId, int resId){
+    public BaseVH setImageRes(int viewId, int resId){
         ImageView imageView = getView(viewId);
         imageView.setImageResource(resId);
         return this;
     }
 
-    public RecyclerVH addOnClickListener(int viewId, View.OnClickListener onClickListener){
+    public BaseVH addOnClickListener(int viewId, View.OnClickListener onClickListener){
         View view = getView(viewId);
         view.setOnClickListener(onClickListener);
         return this;
     }
 
-    public RecyclerVH addOnLongClickListener(int viewId, View.OnLongClickListener onLongClickListener){
+    public BaseVH addOnLongClickListener(int viewId, View.OnLongClickListener onLongClickListener){
         View view = getView(viewId);
         view.setOnLongClickListener(onLongClickListener);
         return this;

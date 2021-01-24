@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 
 import com.yee.feature.R;
-import com.yee.feature.recycler.RecyclerAdapter;
-import com.yee.feature.recycler.RecyclerVH;
+import com.yee.feature.recycler.MultiAdapter;
+import com.yee.feature.recycler.BaseVH;
 import com.yee.feature.ui.bean.GridBean;
 
 import java.util.List;
@@ -19,7 +19,7 @@ import java.util.List;
  * Create on: 2021/1/24 19:41
  * Description:
  */
-public class GridAdapter extends RecyclerAdapter<GridBean> {
+public class GridAdapter extends MultiAdapter<GridBean> {
     public static final String TAG = "GridAdapter";
     public GridAdapter(List<GridBean> data) {
         super(data);
@@ -39,7 +39,7 @@ public class GridAdapter extends RecyclerAdapter<GridBean> {
 
     @NonNull
     @Override
-    public RecyclerVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public BaseVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
         if (viewType == TYPE_HEADER) {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_header,
@@ -51,11 +51,11 @@ public class GridAdapter extends RecyclerAdapter<GridBean> {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_grid,
                     parent, false);
         }
-        return new RecyclerVH(view);
+        return new BaseVH(view);
     }
 
     @Override
-    public void bindData(RecyclerVH holder, GridBean data, int position) {
+    public void bindData(BaseVH holder, GridBean data, int position) {
         if (data.getViewType() == TYPE_HEADER) {
             holder.addOnClickListener(R.id.iv_grid, new View.OnClickListener() {
                 @Override

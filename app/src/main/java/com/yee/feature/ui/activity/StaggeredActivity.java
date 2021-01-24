@@ -2,7 +2,6 @@ package com.yee.feature.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -11,7 +10,7 @@ import android.util.Log;
 
 import com.yee.feature.R;
 import com.yee.feature.recycler.GridDivider;
-import com.yee.feature.recycler.RecyclerAdapter;
+import com.yee.feature.recycler.MultiAdapter;
 import com.yee.feature.ui.adapter.StaggeredAdapter;
 import com.yee.feature.ui.bean.StaggeredBean;
 
@@ -123,7 +122,7 @@ public class StaggeredActivity extends AppCompatActivity {
         rvStaggered.setItemAnimator(new DefaultItemAnimator());
         rvStaggered.setAdapter(adapter);
 
-        adapter.setRecyclerClickListener(new RecyclerAdapter.RecyclerClickListener() {
+        adapter.setRecyclerClickListener(new MultiAdapter.RecyclerClickListener() {
             @Override
             public void onItemClick(int position) {
                 Log.i(TAG, "item click:" + position);

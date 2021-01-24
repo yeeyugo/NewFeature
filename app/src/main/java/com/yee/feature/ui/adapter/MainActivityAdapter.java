@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 
 import com.yee.feature.R;
-import com.yee.feature.recycler.RecyclerAdapter;
-import com.yee.feature.recycler.RecyclerVH;
+import com.yee.feature.recycler.MultiAdapter;
+import com.yee.feature.recycler.BaseVH;
 import com.yee.feature.ui.bean.MainBean;
 
 import java.util.List;
@@ -19,7 +19,7 @@ import java.util.List;
  * Create on: 2021/1/23 22:43
  * Description:
  */
-public class MainActivityAdapter extends RecyclerAdapter<MainBean> {
+public class MainActivityAdapter extends MultiAdapter<MainBean> {
     public static final String TAG = "MainActivityAdapter";
 
     public MainActivityAdapter(List<MainBean> data) {
@@ -40,7 +40,7 @@ public class MainActivityAdapter extends RecyclerAdapter<MainBean> {
 
     @NonNull
     @Override
-    public RecyclerVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public BaseVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
         if (viewType == TYPE_HEADER) {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_header,
@@ -52,11 +52,11 @@ public class MainActivityAdapter extends RecyclerAdapter<MainBean> {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_footer,
                     parent, false);
         }
-        return new RecyclerVH(view);
+        return new BaseVH(view);
     }
 
     @Override
-    public void bindData(RecyclerVH holder, MainBean data, int position) {
+    public void bindData(BaseVH holder, MainBean data, int position) {
         if (data.getItemType() == TYPE_HEADER) {
             holder.addOnClickListener(R.id.iv_grid, new View.OnClickListener() {
                 @Override

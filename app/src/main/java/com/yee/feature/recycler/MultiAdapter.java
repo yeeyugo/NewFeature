@@ -6,7 +6,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import java.util.List;
 
@@ -15,7 +14,7 @@ import java.util.List;
  * Create on: 2021/1/23 22:36
  * Description:
  */
-public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerVH>{
+public abstract class MultiAdapter<T> extends RecyclerView.Adapter<BaseVH>{
     //ItemType布局类型
     public static final int TYPE_HEADER = 0;
     public static final int TYPE_ONE = 1;
@@ -32,7 +31,7 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerVH
     protected List<T> mData;
     private RecyclerClickListener recyclerClickListener;
 
-    public RecyclerAdapter(List<T> data) {
+    public MultiAdapter(List<T> data) {
         mData = data;
     }
 
@@ -41,10 +40,10 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerVH
 
     @NonNull
     @Override
-    public abstract RecyclerVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType);
+    public abstract BaseVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType);
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerVH holder, int position) {
+    public void onBindViewHolder(@NonNull BaseVH holder, int position) {
         bindData(holder, mData.get(position), position);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -116,5 +115,5 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerVH
     }
 
     //抽象方法
-    public abstract void bindData(RecyclerVH holder, T data, int position);
+    public abstract void bindData(BaseVH holder, T data, int position);
 }

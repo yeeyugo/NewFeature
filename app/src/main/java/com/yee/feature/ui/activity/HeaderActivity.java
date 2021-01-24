@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.yee.feature.R;
-import com.yee.feature.recycler.RecyclerAdapter;
+import com.yee.feature.recycler.MultiAdapter;
 import com.yee.feature.ui.adapter.HeaderAdapter;
 import com.yee.feature.ui.bean.FruitBean;
 import com.yee.feature.ui.bean.HeaderBean;
@@ -57,7 +57,7 @@ public class HeaderActivity extends AppCompatActivity {
         rvWrapper.setItemAnimator(new DefaultItemAnimator());
         rvWrapper.setAdapter(adapter);
 
-        adapter.setRecyclerClickListener(new RecyclerAdapter.RecyclerClickListener() {
+        adapter.setRecyclerClickListener(new MultiAdapter.RecyclerClickListener() {
             @Override
             public void onItemClick(int position) {
                 Log.i(TAG, "item click:" + position);

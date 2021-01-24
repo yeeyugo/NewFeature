@@ -11,8 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.yee.feature.R;
-import com.yee.feature.recycler.QuickAdapter;
-import com.yee.feature.recycler.RecyclerAdapter;
+import com.yee.feature.recycler.MultiAdapter;
 import com.yee.feature.ui.activity.RecyclerActivity;
 import com.yee.feature.ui.adapter.MainActivityAdapter;
 import com.yee.feature.ui.bean.MainBean;
@@ -61,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         rvMain.setItemAnimator(new DefaultItemAnimator());
         rvMain.setAdapter(adapter);
 
-        adapter.setRecyclerClickListener(new RecyclerAdapter.RecyclerClickListener() {
+        adapter.setRecyclerClickListener(new MultiAdapter.RecyclerClickListener() {
             @Override
             public void onItemClick(int position) {
                 Log.i(TAG, "click: " + position);

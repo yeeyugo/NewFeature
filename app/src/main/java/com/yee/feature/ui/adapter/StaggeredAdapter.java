@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 
 import com.yee.feature.R;
-import com.yee.feature.recycler.RecyclerAdapter;
-import com.yee.feature.recycler.RecyclerVH;
+import com.yee.feature.recycler.MultiAdapter;
+import com.yee.feature.recycler.BaseVH;
 import com.yee.feature.ui.bean.StaggeredBean;
 
 import java.util.List;
@@ -19,7 +19,7 @@ import java.util.List;
  * Create on: 2021/1/25 6:54
  * Description:
  */
-public class StaggeredAdapter extends RecyclerAdapter<StaggeredBean> {
+public class StaggeredAdapter extends MultiAdapter<StaggeredBean> {
     public static final String TAG = "StaggerAdapter";
 
     public StaggeredAdapter(List<StaggeredBean> data) {
@@ -41,7 +41,7 @@ public class StaggeredAdapter extends RecyclerAdapter<StaggeredBean> {
 
     @NonNull
     @Override
-    public RecyclerVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public BaseVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
         switch (viewType) {
             case TYPE_HEADER:
@@ -56,11 +56,11 @@ public class StaggeredAdapter extends RecyclerAdapter<StaggeredBean> {
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_staggered,
                         parent, false);
         }
-        return new RecyclerVH(view);
+        return new BaseVH(view);
     }
 
     @Override
-    public void bindData(RecyclerVH holder, StaggeredBean data, int position) {
+    public void bindData(BaseVH holder, StaggeredBean data, int position) {
         int viewType = data.getViewType();
         switch (viewType) {
             case TYPE_HEADER:

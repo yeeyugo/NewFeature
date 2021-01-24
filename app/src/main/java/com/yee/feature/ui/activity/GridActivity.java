@@ -2,7 +2,6 @@ package com.yee.feature.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,7 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.yee.feature.R;
-import com.yee.feature.recycler.RecyclerAdapter;
+import com.yee.feature.recycler.MultiAdapter;
 import com.yee.feature.recycler.RecyclerGridDivider;
 import com.yee.feature.ui.adapter.GridAdapter;
 import com.yee.feature.ui.bean.GridBean;
@@ -63,7 +62,7 @@ public class GridActivity extends AppCompatActivity {
         GridAdapter adapter = new GridAdapter(data);
         rvGrid.setAdapter(adapter);
 
-        adapter.setRecyclerClickListener(new RecyclerAdapter.RecyclerClickListener() {
+        adapter.setRecyclerClickListener(new MultiAdapter.RecyclerClickListener() {
             @Override
             public void onItemClick(int position) {
                 Log.i(TAG, "item click:" + position);
