@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import java.util.List;
 
@@ -88,6 +89,19 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerVH
                     }
                 }
             });
+        }
+    }
+
+    @Override
+    public void onViewAttachedToWindow(@NonNull RecyclerVH holder) {
+        super.onViewAttachedToWindow(holder);
+        ViewGroup.LayoutParams layoutParams = holder.itemView.getLayoutParams();
+        if (layoutParams instanceof StaggeredGridLayoutManager.LayoutParams
+                && holder.getLayoutPosition() == 0) {
+            StaggeredGridLayoutManager.LayoutParams lp =
+                    (StaggeredGridLayoutManager.LayoutParams) layoutParams;
+            //如果是瀑布流布局，则头布局占一整行
+            lp.setFullSpan(true);
         }
     }
 
