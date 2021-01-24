@@ -92,19 +92,19 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerVH
         }
     }
 
-    @Override
-    public void onViewAttachedToWindow(@NonNull RecyclerVH holder) {
-        super.onViewAttachedToWindow(holder);
-        ViewGroup.LayoutParams layoutParams = holder.itemView.getLayoutParams();
-        if (layoutParams instanceof StaggeredGridLayoutManager.LayoutParams) {
-            if (holder.getLayoutPosition() == 0) {
-                StaggeredGridLayoutManager.LayoutParams lp =
-                        (StaggeredGridLayoutManager.LayoutParams) layoutParams;
-                //如果是瀑布流布局，则头布局占一整行
-                lp.setFullSpan(true);
-            }
-        }
-    }
+//    @Override
+//    public void onViewAttachedToWindow(@NonNull RecyclerVH holder) {
+//        super.onViewAttachedToWindow(holder);
+//        ViewGroup.LayoutParams layoutParams = holder.itemView.getLayoutParams();
+//        if (layoutParams instanceof StaggeredGridLayoutManager.LayoutParams) {
+//            if (holder.getLayoutPosition() == 0) {
+//                StaggeredGridLayoutManager.LayoutParams lp =
+//                        (StaggeredGridLayoutManager.LayoutParams) layoutParams;
+//                //如果是瀑布流布局，则头布局占一整行
+//                lp.setFullSpan(true);
+//            }
+//        }
+//    }
 
     //Item点击事件
     public interface RecyclerClickListener{

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.yee.feature.R;
+import com.yee.feature.recycler.GridDivider;
 import com.yee.feature.recycler.RecyclerAdapter;
 import com.yee.feature.ui.adapter.StaggeredAdapter;
 import com.yee.feature.ui.bean.StaggeredBean;
@@ -25,7 +26,7 @@ public class StaggeredActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_header);
         List<StaggeredBean> data = new ArrayList<>();
-        data.add(new StaggeredBean(0, R.drawable.header1));
+//        data.add(new StaggeredBean(0, R.drawable.header1));
         int[] images = {
                 R.drawable.meijing1,
                 R.drawable.meijing2,
@@ -112,14 +113,13 @@ public class StaggeredActivity extends AppCompatActivity {
         for (int i = 0; i < images.length; i++) {
             data.add(new StaggeredBean(1, images[i]));
         }
-        data.add(new StaggeredBean(10, -1));
+//        data.add(new StaggeredBean(10, -1));
         StaggeredAdapter adapter = new StaggeredAdapter(data);
 
         RecyclerView rvStaggered = findViewById(R.id.rv_wrapper);
-        rvStaggered.setLayoutManager(new StaggeredGridLayoutManager(3,
+        rvStaggered.setLayoutManager(new StaggeredGridLayoutManager(2,
                 StaggeredGridLayoutManager.VERTICAL));
-//        rvStaggered.addItemDecoration(new DividerItemDecoration(this,
-//                DividerItemDecoration.VERTICAL));
+        rvStaggered.addItemDecoration(new GridDivider(this));
         rvStaggered.setItemAnimator(new DefaultItemAnimator());
         rvStaggered.setAdapter(adapter);
 
