@@ -1,19 +1,31 @@
 package com.yee.feature.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.yee.feature.R;
+import com.yee.feature.recycler.RecyclerAdapter;
+import com.yee.feature.ui.adapter.StaggeredAdapter;
+import com.yee.feature.ui.bean.StaggeredBean;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class StaggeredActivity extends AppCompatActivity {
+    public static final String TAG = "StaggeredActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_header);
-
+        List<StaggeredBean> data = new ArrayList<>();
+        data.add(new StaggeredBean(0, R.drawable.header1));
         int[] images = {
                 R.drawable.meijing1,
                 R.drawable.meijing2,
@@ -96,6 +108,32 @@ public class StaggeredActivity extends AppCompatActivity {
                 R.drawable.meijing79,
                 R.drawable.meijing80
         };
+
+        for (int i = 0; i < images.length; i++) {
+            data.add(new StaggeredBean(1, images[i]));
+        }
+        data.add(new StaggeredBean(10, -1));
+        StaggeredAdapter adapter = new StaggeredAdapter(data);
+
         RecyclerView rvStaggered = findViewById(R.id.rv_wrapper);
+        rvStaggered.setLayoutManager(new StaggeredGridLayoutManager(3,
+                StaggeredGridLayoutManager.VERTICAL));
+//        rvStaggered.addItemDecoration(new DividerItemDecoration(this,
+//                DividerItemDecoration.VERTICAL));
+        rvStaggered.setItemAnimator(new DefaultItemAnimator());
+        rvStaggered.setAdapter(adapter);
+
+        adapter.setRecyclerClickListener(new RecyclerAdapter.RecyclerClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Log.i(TAG, "item click:" + position);
+            }
+
+            @Override
+            public void onItemLongClick(int position) {
+
+            }
+        });
+
     }
 }

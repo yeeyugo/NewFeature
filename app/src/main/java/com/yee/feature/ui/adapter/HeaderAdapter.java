@@ -69,16 +69,16 @@ public class HeaderAdapter extends RecyclerAdapter<HeaderBean> {
         FruitBean fruit = data.getFruit();
 
         if (viewType == TYPE_HEADER) {
-            holder.addOnClickListener(R.id.iv_header, new View.OnClickListener() {
+            holder.addOnClickListener(R.id.iv_grid, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Log.i(TAG, "header was clicked! position=" + position);
-                    holder.setImageRes(R.id.iv_header, R.drawable.fruit01);
+                    holder.setImageRes(R.id.iv_grid, R.drawable.fruit01);
                 }
-            }).addOnLongClickListener(R.id.iv_header, new View.OnLongClickListener() {
+            }).addOnLongClickListener(R.id.iv_grid, new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    holder.setImageRes(R.id.iv_header, R.drawable.header1);
+                    holder.setImageRes(R.id.iv_grid, R.drawable.header1);
                     return true;
                 }
             });

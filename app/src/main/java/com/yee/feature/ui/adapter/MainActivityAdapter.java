@@ -58,7 +58,7 @@ public class MainActivityAdapter extends RecyclerAdapter<MainBean> {
     @Override
     public void bindData(RecyclerVH holder, MainBean data, int position) {
         if (data.getItemType() == TYPE_HEADER) {
-            holder.addOnClickListener(R.id.iv_header, new View.OnClickListener() {
+            holder.addOnClickListener(R.id.iv_grid, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Log.i(TAG, "click header...");

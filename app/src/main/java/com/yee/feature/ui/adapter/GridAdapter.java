@@ -57,7 +57,7 @@ public class GridAdapter extends RecyclerAdapter<GridBean> {
     @Override
     public void bindData(RecyclerVH holder, GridBean data, int position) {
         if (data.getViewType() == TYPE_HEADER) {
-            holder.addOnClickListener(R.id.iv_header, new View.OnClickListener() {
+            holder.addOnClickListener(R.id.iv_grid, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Log.i(TAG, "header click");
@@ -72,8 +72,8 @@ public class GridAdapter extends RecyclerAdapter<GridBean> {
                 }
             });
         } else {
-            holder.setImageRes(R.id.iv_header, data.getImageId())
-                    .addOnClickListener(R.id.iv_header, new View.OnClickListener() {
+            holder.setImageRes(R.id.iv_grid, data.getImageId())
+                    .addOnClickListener(R.id.iv_grid, new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             Log.i(TAG, "item inner image click");
