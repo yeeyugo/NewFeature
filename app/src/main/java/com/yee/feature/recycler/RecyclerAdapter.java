@@ -4,6 +4,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -63,6 +64,31 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerVH
     @Override
     public int getItemCount() {
         return mData.size();
+    }
+
+    @Override
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
+        //RecyclerView在开始观察该适配器时调用
+        super.onAttachedToRecyclerView(recyclerView);
+        RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
+        if (manager instanceof GridLayoutManager) {
+            GridLayoutManager gridLayoutManager = (GridLayoutManager) manager;
+            //设置每个条目的跨度，如果有头布局，则占一整行，否则按设置的摆放
+            gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int position) {
+                    //每个position上的item占据的单元格个数
+                    int viewType = getItemViewType(position);
+                    switch (viewType) {
+                        case TYPE_HEADER:
+                        case TYPE_FOOTER:
+                            return gridLayoutManager.getSpanCount();
+                        default:
+                            return 1;
+                    }
+                }
+            });
+        }
     }
 
     //Item点击事件

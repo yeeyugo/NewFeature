@@ -12,7 +12,6 @@ import android.util.Log;
 
 import com.yee.feature.R;
 import com.yee.feature.recycler.QuickAdapter;
-import com.yee.feature.ui.MainActivity;
 import com.yee.feature.ui.adapter.RecyclerActivityAdapter;
 
 import java.util.ArrayList;
@@ -28,16 +27,18 @@ public class RecyclerActivity extends AppCompatActivity {
 
         List<String> data = new ArrayList<>();
         data.add("装饰者模式添加header/footer");
+        data.add("网格模式");
+        data.add("瀑布流");
         data.add("添加emptyView");
         data.add("侧滑删除及拖拽");
         data.add("自定义ItemDecoration");
-        data.add("网格模式");
-        data.add("瀑布流");
         data.add("多ItemType支持");
         data.add("在MVVM中绑定数据");
         data.add("自定义Animator");
         List<Class> list = new ArrayList<>();
-        list.add(AdapterWrapperActivity.class);
+        list.add(HeaderActivity.class);
+        list.add(GridActivity.class);
+        list.add(StaggeredActivity.class);
 
         RecyclerActivityAdapter adapter = new RecyclerActivityAdapter(data);
 

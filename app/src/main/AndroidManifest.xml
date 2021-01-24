@@ -10,7 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NewFeature">
-        <activity android:name=".ui.activity.AdapterWrapperActivity"></activity>
+        <activity android:name=".ui.activity.StaggeredActivity"></activity>
+        <activity android:name=".ui.activity.GridActivity" />
+        <activity android:name=".ui.activity.HeaderActivity" />
         <activity android:name=".ui.activity.RecyclerActivity" />
         <activity android:name=".ui.MainActivity">
             <intent-filter>
