@@ -30,6 +30,8 @@ public class RecyclerActivity extends AppCompatActivity {
         data.add("网格模式");
         data.add("瀑布流");
         data.add("结合SmartRefreshLayout");
+        data.add("Grid分组展示");
+        data.add("可展开的多级列表");
         data.add("添加emptyView");
         data.add("侧滑删除及拖拽");
         data.add("自定义ItemDecoration");
@@ -41,6 +43,7 @@ public class RecyclerActivity extends AppCompatActivity {
         list.add(GridActivity.class);
         list.add(StaggeredActivity.class);
         list.add(SmartRefreshActivity.class);
+        list.add(CategoryActivity.class);
 
         RecyclerActivityAdapter adapter = new RecyclerActivityAdapter(data);
 
